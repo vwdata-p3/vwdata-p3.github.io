@@ -12,7 +12,7 @@ aux_links:
     "Repositories":
         - "//github.com/vwdata-p3"
     "Live demo":
-        - "/demo"
+        - "/links/demo"
 
 # Build settings
 markdown: kramdown

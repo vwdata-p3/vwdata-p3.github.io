@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="refresh" content="0; url={{ page.redirect-url }}">
+        <title>Redirecting to {{ page.redirect-name }}...</title>
+        <script type="text/javascript">
+            window.location.href = "{{ page.redirect-url }}"
+        </script>
+    </head>
+    <body>
+        Please follow this <a href='{{ page.redirect-url }}'>link to {{ page.redirect-name }}.</a>.
+    </body>
+</html>
+
