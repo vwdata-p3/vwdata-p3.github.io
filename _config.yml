@@ -6,6 +6,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://vwdata-p3.github.io" 
 github_username:  vwdata-p3
 
+heading_anchors: true # see https://pmarsceill.github.io/just-the-docs/docs/configuration/#heading-anchor-links
+
 aux_links:
     "Repositories":
         - "//github.com/vwdata-p3"
