@@ -1,0 +1,16 @@
+title: PEP3
+remote_theme: pmarsceill/just-the-docs
+description: >- # this means to ignore newlines until "baseurl:"
+  VWData's PEP3 homepage.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://vwdata-p3.github.io" 
+github_username:  vwdata-p3
+
+aux_links:
+    "Repositories":
+        - "//github.com/vwdata-p3"
+    "Live demo":
+        - "/demo"
+
+# Build settings
+markdown: kramdown
