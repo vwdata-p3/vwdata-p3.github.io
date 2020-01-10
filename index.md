@@ -2,10 +2,10 @@
 layout: default
 title: Home
 ---
-PEP3 is a experimental cryptographic system
+**PEP3** is a experimental cryptographic system
 to provide polymorphic encryption 
 and pseudonymisation for large volumes of sensitive data. 
-The system which
+The system, which
 is based on
 [PEP](https://pep.cs.ru.nl),
 has been designed
