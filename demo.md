@@ -5,14 +5,15 @@ nav_order: 10
 ---
 ## Live demo
 
-We make some remarks on the features of 
-the [live demo](/links/demo){:target="_blank"} 
+We make some remarks on the features of the demo
 which consists of several panels, 
 each one showing a different aspect of the PEP3 system.
 
+[Go to demo](/links/demo){: .btn .btn-blue}{: target="_blank" }
+
 ### Metering process
 The panel marked "**(1)**"
-allows one to store a flow record in a our temporary datebase.
+allows one to store a flow record in a our temporary database.
 Here one takes the role of the "metering process"
 that usually generates flow records based
 on the traffic through a router.
@@ -35,14 +36,21 @@ the involvement of one the peers in some operation.
 Accordingly, three peers briefly flash green 
 when a flow record that contains a fresh IP address is stored.
 
-By clicking on the circles on can switch the peers on and off,
-which is indicated by a green and red border, respectively.
+By clicking on the circles one can switch the peers on and off,
+which is indicated by a green and grey border, respectively.
 When fewer than three peers are active,
-storing a flow record results in an error
-(without three active peers, the operation can not be performed.)
+storing a flow record results in an error.
+(Without three active peers, the operation can not be performed.)
 
-Note that aside from you there might be a second visitor
-turned peers on and off, and storing flow records.
+When peers are flashing and changing without your intervention,
+this is probably caused
+by another visitor of the webdemo.
+You may also find their records in the database.
+To limit interference,
+we empty the database and reset the peers
+every 10 minutes.
+
+
 
 ### Queries
 To retrieve flow records one can enter
@@ -59,9 +67,9 @@ title of the panel.  Note that the same query results in different
 pseudonyms for the researcher and investigator.
 
 Concrete pseudonyms can only be included in a query via a parameter.
-To select all flow records with the choosen pseudonymised source IP address,
+To select all flow records with the chosen pseudonymised source IP address,
 press "Add parameter", enter `a` under "parameter name", the
-choosen pseudonym under "value"[^1], and use the 
+chosen pseudonym under "value"[^1], and use the 
 following query.
 ```
 SELECT peped_flows.p_src_ip, peped_flows.src_port, 
@@ -72,16 +80,71 @@ LIMIT 10
 ```
 If the textbox turns red,
 then the query is invalid in some way
-(explained in the javascript console).
+(explained in detail in the javascript console).
 Note that selecting on a pseudonym of the researcher as the investigator
 yields no results.
 
+[^1]: When copying a pseudonym, make sure you copy the whole pseudonym; when the pseudonym contains "+" only one side of it might have been selected by double clicking.
 
-[^1]: When copying a pseudonym, make sure you copy the whole pseudonym; when the pseudonym contains "+" only one side of it might have been selected.
+Only a limited subset of SQL is supported;
+the exact syntax can be found here
+[here](https://github.com/vwdata-p3/webdemo/blob/master/resources/sql.grammar).
+Moreover, some restrictions are placed
+on which operations can be performed on pseudonyms,
+which are set out [here](https://github.com/vwdata-p3/webdemo/blob/master/sql.py).
+
+### Depseudonymisation
+
+In certain circumstances depseudonymisation
+of an pseudonymised IP address might be appropriate,
+for example, when a pseudonymised IP address
+appears to
+commands and controls a botnet.
+Peers will not comply with such a request
+unless a 'warrant' to this effect
+is presented
+that is signed by
+a separate designated entity.
+How they should come to their decision to issue the warrant
+ is beyond the scope of 
+this demonstration,
+but you can take their role
+via panel "**(3)**" marked "Judge".
+Just copy a pseudonym you retrieved via panel (2)
+into the textbox, select whose ("Researcher" or "Investigator") 
+pseudonym is being
+depseudonymised, and press "Sign"
+to create the warrant.
+
+Note that the warrant mentions the pseudonym
+only in encrypted form,
+so that the warrant can be presented to the peers 
+without revealing the pseudonym.
+
+To perform the depseudonymisation,
+copy[^1] the encrypted pseudonym, and signature,
+from panel "(3)" to panel "**(4)**", 
+select your role ("Researcher" or "Investigator"),
+and hit "Submit request". 
+(Be sure the database was not cleared in the meantime.)
+
+Note that the "Investigator" cannot present a warrant in panel "(3)"
+that is issued to the "Researcher";
+the peers will reject it.
 
 
+Since to whom a pseudonym belongs
+a judge cannot tell it is in principle possible
+to create
+a warrant that allows the investigator to depseudonymise 
+one of the researcher's pseudonyms.
+But upon execution of the warrant
+the peers will interpret the encrypted pseudonym
+as one of the investigator's,
+and the depseudonymisation
+will
+result in failure or garbage.
 
-
-
-
+### Notes
+{: .text-delta }
 

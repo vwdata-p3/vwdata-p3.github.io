@@ -14,7 +14,7 @@ of the
 [VWData program](https://commit2data.nl/vwdata)
 to more securely store the flow records 
 collected by network operators,
-and help minimize the processing of personal data
+and help minimise the processing of personal data
 in this context.
 
 Details about PEP3 can be found [this paper](https://arxiv.org/abs/1911.02674),
