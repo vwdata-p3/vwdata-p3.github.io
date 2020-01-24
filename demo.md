@@ -78,7 +78,7 @@ peped_flows.packets FROM peped_flows
 WHERE peped_flows.p_src_ip=:a
 LIMIT 10
 ```
-If the textbox turns red,
+If the text box turns red,
 then the query is invalid in some way
 (explained in detail in the javascript console).
 Note that selecting on a pseudonym of the researcher as the investigator
@@ -86,12 +86,48 @@ yields no results.
 
 [^1]: When copying a pseudonym, make sure you copy the whole pseudonym; when the pseudonym contains "+" only one side of it might have been selected by double clicking.
 
-Only a limited subset of SQL is supported;
-the exact syntax can be found here
-[here](https://github.com/vwdata-p3/webdemo/blob/master/resources/sql.grammar).
-Moreover, some restrictions are placed
-on which operations can be performed on pseudonyms,
-which are set out [here](https://github.com/vwdata-p3/webdemo/blob/master/sql.py).
+In order to keep the pseudonyms the database
+uses internally confidential
+not every SQL query is allowed.
+Obviously,
+direct comparisons between pseudonyms and 'plain' values such as
+```
+SELECT peped_flows.p_src_ip FROM peped_flows
+WHERE peped_flows.p_src_ip="some longer string"
+```
+are banned, and neither is an inequality test of the form
+```
+SELECT peped_flows.p_src_ip FROM peped_flows
+WHERE peped_flows.p_src_ip<"e"
+```
+allowed, as it would reveal the values of these pseudonyms by bisection.
+Less revealing operations such as
+ordering by a pseudonymised column, 
+```
+SELECT peped_flows.p_src_ip FROM peped_flows
+ORDER BY peped_flows.p_src_ip
+```
+are disallowed as well,
+on the general principle that the ordering
+of the database's pseudonyms is none of the querier's concern.
+In the same vein, 
+operations such as `+`, `-`, `SUM`, ...
+on pseudonyms
+are rejected too. 
+
+Counting the number of pseudonyms, 
+on the other hand,
+is perfectly acceptable:
+```
+SELECT COUNT(peped_flows.p_src_ip), peped_flows.protocol  FROM peped_flows 
+GROUP BY peped_flows.protocol
+```
+For this demonstration,
+we analysed and support
+[only a small subset of SQL](https://github.com/vwdata-p3/webdemo/blob/master/resources/sql.grammar);
+the additional restrictions placed on these queries
+for dealing with pseudonyms
+are set out [here](https://github.com/vwdata-p3/webdemo/blob/master/sql.py).
 
 ### Depseudonymisation
 
@@ -111,7 +147,7 @@ this demonstration,
 but you can take their role
 via panel "**(3)**" marked "Judge".
 Just copy a pseudonym you retrieved via panel (2)
-into the textbox, select whose ("Researcher" or "Investigator") 
+into the text box, select whose ("Researcher" or "Investigator") 
 pseudonym is being
 depseudonymised, and press "Sign"
 to create the warrant.
