@@ -15,10 +15,10 @@ each one showing a different aspect of the PEP3 system.
 The panel marked "**(1)**"
 allows one to store a flow record in a our temporary database.
 Here one takes the role of the "metering process"
-that usually generates flow records based
+that normally generates flow records based
 on the traffic through a router.
 To store a flow record, 
-complete the form,
+complete the form
 and press "Submit flow record".
 On success
 the panel flashes green,
@@ -83,11 +83,13 @@ then the query is invalid in some way
 (explained in detail in the javascript console).
 Note that selecting on a pseudonym of the researcher as the investigator
 yields no results.
+This strict separation of pseudonyms is one of the main benefits
+of using PEP.
 
 [^1]: When copying a pseudonym, make sure you copy the whole pseudonym; when the pseudonym contains "+" only one side of it might have been selected by double clicking.
 
 In order to keep the pseudonyms the database
-uses internally confidential
+uses internally confidential,
 not every SQL query is allowed.
 Obviously,
 direct comparisons between pseudonyms and 'plain' values such as
@@ -123,7 +125,7 @@ SELECT COUNT(peped_flows.p_src_ip), peped_flows.protocol  FROM peped_flows
 GROUP BY peped_flows.protocol
 ```
 For this demonstration,
-we analysed and support
+we support
 [only a small subset of SQL](https://github.com/vwdata-p3/webdemo/blob/master/resources/sql.grammar);
 the additional restrictions placed on these queries
 for dealing with pseudonyms
